@@ -197,7 +197,7 @@ end
 combination_cps = Hash.new
 codon_list.each do |x|
   codon_list.each do |y|
-    combination_cps["#{x}-#{y}"] = 0
+    combination_cps[reverse_transcription("#{x}-#{y}")] = 0
   end
 end
 puts aminoacid_combination_count
@@ -215,7 +215,5 @@ codon_combination_count.each do |a,count|
 end
 
 
-combination_cps.each do |x,y|
-	puts "#{x}\t#{y}"
-end
+puts combination_cps
 puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
