@@ -14,7 +14,8 @@ class HomeController < ApplicationController
 				first = x
 				second = @sequence_arr[i+1]
 				if "#{@@translation[first]}-#{@@translation[second]}".index("X") == nil
-					cps = Math.log( (@sequence_arr.map.with_index{|x, i| i if (x == first) and (@sequence_arr[i+1] == second)}.compact.count) / (@@aminoacid_combination_count["#{@@translation[first]}-#{@@translation[second]}"] * @@aminoacid_codon_bias[@@translation[first]][first] * @@aminoacid_codon_bias[@@translation[second]][second] ) )
+					#cps = Math.log( (@sequence_arr.map.with_index{|x, i| i if (x == first) and (@sequence_arr[i+1] == second)}.compact.count) / (@@aminoacid_combination_count["#{@@translation[first]}-#{@@translation[second]}"] * @@aminoacid_codon_bias[@@translation[first]][first] * @@aminoacid_codon_bias[@@translation[second]][second] ) )
+					cps = @@cps_hash["#{reverse_transcription(first)}-#{reverse_transcription(second)}"]
 					@combination_cps[reverse_transcription("#{first}-#{second}")] = cps
 					@cps_arr << cps
 					cpb_total += cps
