@@ -9,12 +9,30 @@
 <div style="display:inline-block;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:10px;">
   <div>
     <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
-      <%=first.gsub("U","T")%>
+      <div style="display:block; font-size:10px; border-top:1px solid black;">
+        <%=i + 1%>
+      </div>
+      <div style="display:block; font-size:8px; word-break: break-word; height:20px;">
+        <%=@aminoacid_full_name[@translation[first]]%>
+      </div>
+      <div style="font-size:15px; text-align:center;">
+        <%=first.gsub("U","T")%>
+      </div>
     </div>
     <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+      <div style="display:block; font-size:10px;border-top:1px solid black;">
+        <%=i + 2%>
+      </div>
+      <div style="display:block; font-size:8px; word-break: break-word; height:20px;">
+      <% if !second.nil?%>
+        <%=@aminoacid_full_name[@translation[second]]%>
+      <%end%>
+      </div>
+      <div style="font-size:15px; text-align:center;">
       <% if !second.nil?%>
         <%=second.gsub("U","T")%>
       <%end%>
+      </div>
     </div>
   </div>
       <%if third != nil and second != nil%>

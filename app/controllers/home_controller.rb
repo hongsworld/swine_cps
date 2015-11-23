@@ -3,6 +3,8 @@ class HomeController < ApplicationController
 	end
 
 	def submit
+		@aminoacid_full_name = @@aminoacid_full_name
+		@translation = @@translation
 		sample = params[:sequence].gsub(" ","")
 		@sequence_arr = transcription(sample).scan(/.../)
 		@combination_cps = Hash.new
