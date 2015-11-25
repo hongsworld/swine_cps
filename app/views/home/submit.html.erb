@@ -6,7 +6,7 @@
     <%first = x%>
     <%second = @sequence_arr[i+1]%>
     <%third = @sequence_arr[i+2]%>
-<div style="display:inline-block;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:30px;">
+<div style="display:inline-block;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:46px;">
   <div>
     <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
       <div style="display:block; font-size:10px; border-top:1px solid black;">
@@ -47,9 +47,12 @@
           <% if @combination_cps["#{second.gsub("U","T")}-#{third.gsub("U","T")}"] != nil%>
             <span ><%=@combination_cps["#{second.gsub("U","T")}-#{third.gsub("U","T")}"].round(4)%></span>
             <br>
-            <span style="color:#777; font-size:7px;"><%=@minimal_candidate_arr[i+1]%></span>
+            <hr>
+            <span style="color:#333; font-size:7px;">min-cps</span>
             <br>
-            <span style="color:#777"><%=@minimal_candidate_cpses[i+1].round(4)%></span>
+            <span style="color:#333; font-size:7px;"><%=@minimal_candidate_arr[i+1]%></span>
+            <br>
+            <span style="color:#333"><%=@minimal_candidate_cpses[i+1].round(4)%></span>
           <%end%>
     </div>
   </div>
@@ -74,9 +77,12 @@
         <%end%>
         <span><%=@combination_cps["#{first.gsub("U","T")}-#{second.gsub("U","T")}"].round(4)%></span>
         <br>
-        <span style="color:#777; font-size:7px;"><%=@minimal_candidate_arr[i]%></span>
+        <hr>
+        <span style="color:#333; font-size:7px;">min-cps</span>
         <br>
-        <span style="color:#777"><%=@minimal_candidate_cpses[i].round(4)%></span>
+        <span style="color:#333; font-size:7px;"><%=@minimal_candidate_arr[i]%></span>
+        <br>
+        <span style="color:#333"><%=@minimal_candidate_cpses[i].round(4)%></span>
     </div>
   </div>
       <%else%>
