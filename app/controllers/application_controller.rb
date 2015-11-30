@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 	@@translation["UUC"] = "F"
 	@@translation["UCC"] = "S"
 	@@translation["UAC"] = "Y"
-	@@translation["UGC"] = "S"
+	@@translation["UGC"] = "C"##modify
 	@@translation["UUA"] = "L"
 	@@translation["UCA"] = "S"
 	@@translation["UAA"] = "X"
