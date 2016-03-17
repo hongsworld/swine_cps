@@ -19,7 +19,7 @@ class HomeController < ApplicationController
 				second = @sequence_arr[i+1]
 				if "#{@@translation[first]}-#{@@translation[second]}".index("X") == nil
 					#cps = Math.log( (@sequence_arr.map.with_index{|x, i| i if (x == first) and (@sequence_arr[i+1] == second)}.compact.count) / (@@aminoacid_combination_count["#{@@translation[first]}-#{@@translation[second]}"] * @@aminoacid_codon_bias[@@translation[first]][first] * @@aminoacid_codon_bias[@@translation[second]][second] ) )
-					cps = @@cps_hash["#{reverse_transcription(first)}-#{reverse_transcription(second)}"]
+					cps = @@cps_swine_hash["#{reverse_transcription(first)}-#{reverse_transcription(second)}"]
 					@combination_cps[reverse_transcription("#{first}-#{second}")] = cps
 					@cps_arr << cps
 					cpb_total += cps
@@ -38,7 +38,7 @@ class HomeController < ApplicationController
 
 					codon_combination_cpses = Array.new
 					codon_combination_candiates.each do |x|
-						codon_combination_cpses << @@cps_hash[x]
+						codon_combination_cpses << @@cps_swine_hash[x]
 					end
 					minimal_candidate_cps = codon_combination_cpses.min
 					logger.info minimal_candidate_cps
