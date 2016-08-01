@@ -1,0 +1,95 @@
+<h1>CPB : <%=@swine_cpb_score%></h1>
+<br>
+<%swine_opacity= 1%>
+<%@swine_sequence_arr.each_with_index do |x,i|%>
+  <%if i.even?%>
+    <%swine_first = x%>
+    <%swine_second = @swine_sequence_arr[i+1]%>
+    <%swine_third = @swine_sequence_arr[i+2]%>
+<div style="display:inline-block;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:46px;">
+  <div>
+    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+      <div style="display:block; font-size:10px; border-top:1px solid black;">
+        <%=i + 1%>
+      </div>
+      <div style="display:block; font-size:8px; word-break: break-word; height:20px;">
+        <%=@swine_aminoacid_full_name[@swine_translation[swine_first]]%>
+      </div>
+      <div style="font-size:15px; text-align:center;">
+        <%=swine_first.gsub("U","T")%>
+      </div>
+    </div>
+    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+      <div style="display:block; font-size:10px;border-top:1px solid black;">
+        <%=i + 2%>
+      </div>
+      <div style="display:block; font-size:8px; word-break: break-word; height:20px;">
+      <% if !swine_second.nil?%>
+        <%=@swine_aminoacid_full_name[@swine_translation[swine_second]]%>
+      <%end%>
+      </div>
+      <div style="font-size:15px; text-align:center;">
+      <% if !swine_second.nil?%>
+        <%=swine_second.gsub("U","T")%>
+      <%end%>
+      </div>
+    </div>
+  </div>
+      <%if swine_third != nil and swine_second != nil%>
+        <%if swine_second != nil and swine_third != nil and @swine_combination_cps["#{swine_second.gsub("U","T")}-#{swine_third.gsub("U","T")}"] != nil %>
+
+  <div>
+          <%if @swine_combination_cps["#{swine_second.gsub("U","T")}-#{swine_third.gsub("U","T")}"].round(4) >= 0%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background-color: rgba(255,0,0,<%= swine_opacity * ((@swine_combination_cps["#{swine_second.gsub("U","T")}-#{swine_third.gsub("U","T")}"] - @swine_positive_cps_min) / (@swine_positive_cps_max - @swine_positive_cps_min)).abs%>);">
+          <%else%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background-color: rgba(0,119,221,<%=  1 - swine_opacity * ((@swine_combination_cps["#{swine_second.gsub("U","T")}-#{swine_third.gsub("U","T")}"] - @swine_negative_cps_min) / (@swine_negative_cps_max - @swine_negative_cps_min)).abs%>);">
+          <%end%>
+          <% if @swine_combination_cps["#{swine_second.gsub("U","T")}-#{swine_third.gsub("U","T")}"] != nil%>
+            <span ><%=@swine_combination_cps["#{swine_second.gsub("U","T")}-#{swine_third.gsub("U","T")}"].round(4)%></span>
+            <br>
+            <hr>
+            <span style="color:#333; font-size:7px;">min-cps</span>
+            <br>
+            <span style="color:#333; font-size:7px;"><%=@swine_minimal_candidate_arr[i+1]%></span>
+            <br>
+            <span style="color:#333"><%=@swine_minimal_candidate_cpses[i+1].round(4)%></span>
+          <%end%>
+    </div>
+  </div>
+        <%else%>
+  <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background:black;">
+    <span style="color:white">terminal</span>
+  </div>
+        <%end%>
+      <%else%>
+  <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background:black;">
+    <span style="color:white">terminal</span>
+  </div>
+      <%end%>
+
+      <%if swine_first != nil and swine_second != nil and @swine_combination_cps["#{swine_first.gsub("U","T")}-#{swine_second.gsub("U","T")}"] != nil%>
+
+  <div>
+        <%if @swine_combination_cps["#{swine_first.gsub("U","T")}-#{swine_second.gsub("U","T")}"].round(4) >= 0%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(255,0,0,<%= swine_opacity * ((@swine_combination_cps["#{swine_first.gsub("U","T")}-#{swine_second.gsub("U","T")}"] - @swine_positive_cps_min) / (@swine_positive_cps_max - @swine_positive_cps_min)).abs%>);">
+        <%else%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(0,119,221,<%= 1 - swine_opacity * ((@swine_combination_cps["#{swine_first.gsub("U","T")}-#{swine_second.gsub("U","T")}"] - @swine_negative_cps_min) / (@swine_negative_cps_max - @swine_negative_cps_min)).abs%>);">
+        <%end%>
+        <span><%=@swine_combination_cps["#{swine_first.gsub("U","T")}-#{swine_second.gsub("U","T")}"].round(4)%></span>
+        <br>
+        <hr>
+        <span style="color:#333; font-size:7px;">min-cps</span>
+        <br>
+        <span style="color:#333; font-size:7px;"><%=@swine_minimal_candidate_arr[i]%></span>
+        <br>
+        <span style="color:#333"><%=@swine_minimal_candidate_cpses[i].round(4)%></span>
+    </div>
+  </div>
+      <%else%>
+  <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background:black;">
+    <span style="color:white">terminal</span>
+  </div>
+      <%end%>
+  </div>
+  <%end%>
+<%end%>

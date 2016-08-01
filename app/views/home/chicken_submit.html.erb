@@ -1,0 +1,95 @@
+<h1>CPB : <%=@chicken_cpb_score%></h1>
+<br>
+<%chicken_opacity= 1%>
+<%@chicken_sequence_arr.each_with_index do |x,i|%>
+  <%if i.even?%>
+    <%chicken_first = x%>
+    <%chicken_second = @chicken_sequence_arr[i+1]%>
+    <%chicken_third = @chicken_sequence_arr[i+2]%>
+<div style="display:inline-block;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:46px;">
+  <div>
+    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+      <div style="display:block; font-size:10px; border-top:1px solid black;">
+        <%=i + 1%>
+      </div>
+      <div style="display:block; font-size:8px; word-break: break-word; height:20px;">
+        <%=@chicken_aminoacid_full_name[@chicken_translation[chicken_first]]%>
+      </div>
+      <div style="font-size:15px; text-align:center;">
+        <%=chicken_first.gsub("U","T")%>
+      </div>
+    </div>
+    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+      <div style="display:block; font-size:10px;border-top:1px solid black;">
+        <%=i + 2%>
+      </div>
+      <div style="display:block; font-size:8px; word-break: break-word; height:20px;">
+      <% if !chicken_second.nil?%>
+        <%=@chicken_aminoacid_full_name[@chicken_translation[chicken_second]]%>
+      <%end%>
+      </div>
+      <div style="font-size:15px; text-align:center;">
+      <% if !chicken_second.nil?%>
+        <%=chicken_second.gsub("U","T")%>
+      <%end%>
+      </div>
+    </div>
+  </div>
+      <%if chicken_third != nil and chicken_second != nil%>
+        <%if chicken_second != nil and chicken_third != nil and @chicken_combination_cps["#{chicken_second.gsub("U","T")}-#{chicken_third.gsub("U","T")}"] != nil %>
+
+  <div>
+          <%if @chicken_combination_cps["#{chicken_second.gsub("U","T")}-#{chicken_third.gsub("U","T")}"].round(4) >= 0%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background-color: rgba(255,0,0,<%= chicken_opacity * ((@chicken_combination_cps["#{chicken_second.gsub("U","T")}-#{chicken_third.gsub("U","T")}"] - @chicken_positive_cps_min) / (@chicken_positive_cps_max - @chicken_positive_cps_min)).abs%>);">
+          <%else%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background-color: rgba(0,119,221,<%=  1 - chicken_opacity * ((@chicken_combination_cps["#{chicken_second.gsub("U","T")}-#{chicken_third.gsub("U","T")}"] - @chicken_negative_cps_min) / (@chicken_negative_cps_max - @chicken_negative_cps_min)).abs%>);">
+          <%end%>
+          <% if @chicken_combination_cps["#{chicken_second.gsub("U","T")}-#{chicken_third.gsub("U","T")}"] != nil%>
+            <span ><%=@chicken_combination_cps["#{chicken_second.gsub("U","T")}-#{chicken_third.gsub("U","T")}"].round(4)%></span>
+            <br>
+            <hr>
+            <span style="color:#333; font-size:7px;">min-cps</span>
+            <br>
+            <span style="color:#333; font-size:7px;"><%=@chicken_minimal_candidate_arr[i+1]%></span>
+            <br>
+            <span style="color:#333"><%=@chicken_minimal_candidate_cpses[i+1].round(4)%></span>
+          <%end%>
+    </div>
+  </div>
+        <%else%>
+  <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background:black;">
+    <span style="color:white">terminal</span>
+  </div>
+        <%end%>
+      <%else%>
+  <div style="text-align:center; font-size:8px; position:absolute; left:47.00px;width:32.2px; background:black;">
+    <span style="color:white">terminal</span>
+  </div>
+      <%end%>
+
+      <%if chicken_first != nil and chicken_second != nil and @chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"] != nil%>
+
+  <div>
+        <%if @chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"].round(4) >= 0%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(255,0,0,<%= chicken_opacity * ((@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"] - @chicken_positive_cps_min) / (@chicken_positive_cps_max - @chicken_positive_cps_min)).abs%>);">
+        <%else%>
+    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(0,119,221,<%= 1 - chicken_opacity * ((@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"] - @chicken_negative_cps_min) / (@chicken_negative_cps_max - @chicken_negative_cps_min)).abs%>);">
+        <%end%>
+        <span><%=@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"].round(4)%></span>
+        <br>
+        <hr>
+        <span style="color:#333; font-size:7px;">min-cps</span>
+        <br>
+        <span style="color:#333; font-size:7px;"><%=@chicken_minimal_candidate_arr[i]%></span>
+        <br>
+        <span style="color:#333"><%=@chicken_minimal_candidate_cpses[i].round(4)%></span>
+    </div>
+  </div>
+      <%else%>
+  <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background:black;">
+    <span style="color:white">terminal</span>
+  </div>
+      <%end%>
+  </div>
+  <%end%>
+<%end%>
