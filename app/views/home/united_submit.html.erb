@@ -70,7 +70,9 @@
       <br>
       <span style="color:#333; font-size:7px;"><%=@chicken_minimal_candidate_arr[i+1]%></span>
       <br>
+      <%if !@chicken_minimal_candidate_cpses[i+1].nil?%>
       <span style="color:#333"><%=@chicken_minimal_candidate_cpses[i+1].round(4)%></span>
+      <%end%>
     <%end%>
     </div>
   </div>
@@ -94,7 +96,9 @@
       <br>
       <span style="color:#333; font-size:7px;"><%=@swine_minimal_candidate_arr[i+1]%></span>
       <br>
+      <%if !@swine_minimal_candidate_cpses[i+1].nil?%>
       <span style="color:#333"><%=@swine_minimal_candidate_cpses[i+1].round(4)%></span>
+      <%end%>
     <%end%>
     </div>
   </div>
@@ -117,7 +121,9 @@
       <br>
       <span style="color:#333; font-size:7px;"><%=@human_minimal_candidate_arr[i+1]%></span>
       <br>
+      <%if !@human_minimal_candidate_cpses[i+1].nil?%>
       <span style="color:#333"><%=@human_minimal_candidate_cpses[i+1].round(4)%></span>
+      <%end%>
     <%end%>
     </div>
   </div>
@@ -145,10 +151,13 @@
       <span><%=@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"].round(4)%></span>
       <br>
       <hr>
+      chicken
+      <br>
       <span style="color:#333; font-size:7px;">min-cps</span>
       <br>
       <span style="color:#333; font-size:7px;"><%=@chicken_minimal_candidate_arr[i]%></span>
       <br>
+      <%logger.info(i)%>
       <span style="color:#333"><%=@chicken_minimal_candidate_cpses[i].round(4)%></span>
     </div>
   </div>

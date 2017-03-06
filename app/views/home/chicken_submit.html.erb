@@ -6,9 +6,9 @@
     <%chicken_first = x%>
     <%chicken_second = @chicken_sequence_arr[i+1]%>
     <%chicken_third = @chicken_sequence_arr[i+2]%>
-<div style="display:inline-block;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:46px;">
+<div style="display:inline-block;vertical-align:top;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:46px;">
   <div>
-    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+    <div style="display:inline-block;vertical-align:top;width:50%;font-size:15px; text-align:center;">
       <div style="display:block; font-size:10px; border-top:1px solid black;">
         <%=i + 1%>
       </div>
@@ -19,7 +19,7 @@
         <%=chicken_first.gsub("U","T")%>
       </div>
     </div>
-    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+    <div style="display:inline-block;vertical-align:top;width:50%;font-size:15px; text-align:center;">
       <div style="display:block; font-size:10px;border-top:1px solid black;">
         <%=i + 2%>
       </div>
@@ -71,9 +71,9 @@
 
   <div>
         <%if @chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"].round(4) >= 0%>
-    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(255,0,0,<%= chicken_opacity * ((@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"] - @chicken_positive_cps_min) / (@chicken_positive_cps_max - @chicken_positive_cps_min)).abs%>);">
+    <div style="text-align:center; font-size:8px; position:relative; left:15.00px;width:32.2px; background-color: rgba(255,0,0,<%= chicken_opacity * ((@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"] - @chicken_positive_cps_min) / (@chicken_positive_cps_max - @chicken_positive_cps_min)).abs%>);">
         <%else%>
-    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(0,119,221,<%= 1 - chicken_opacity * ((@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"] - @chicken_negative_cps_min) / (@chicken_negative_cps_max - @chicken_negative_cps_min)).abs%>);">
+    <div style="text-align:center; font-size:8px; position:relative; left:15.00px;width:32.2px; background-color: rgba(0,119,221,<%= 1 - chicken_opacity * ((@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"] - @chicken_negative_cps_min) / (@chicken_negative_cps_max - @chicken_negative_cps_min)).abs%>);">
         <%end%>
         <span><%=@chicken_combination_cps["#{chicken_first.gsub("U","T")}-#{chicken_second.gsub("U","T")}"].round(4)%></span>
         <br>
@@ -86,7 +86,7 @@
     </div>
   </div>
       <%else%>
-  <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background:black;">
+  <div style="text-align:center; font-size:8px; position:relative; left:15.00px;width:32.2px; background:black;">
     <span style="color:white">terminal</span>
   </div>
       <%end%>

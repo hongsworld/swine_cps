@@ -9,7 +9,8 @@ class HomeController < ApplicationController
 	def swine_submit
     @swine_aminoacid_full_name = @@aminoacid_full_name
     @swine_translation = @@translation
-    swine_sample = params[:sequence].gsub(" ","")
+    swine_sample = params[:sequence].gsub(" ","").gsub("\n","").gsub("\t","").gsub("\r","").upcase
+
     @swine_sequence_arr = transcription(swine_sample).scan(/.../)
     @swine_combination_cps = Hash.new
     swine_cpb_total = 0
@@ -25,8 +26,10 @@ class HomeController < ApplicationController
           swine_cps = @@cps_swine_hash["#{reverse_transcription(swine_first)}-#{reverse_transcription(swine_second)}"]
           @swine_combination_cps[reverse_transcription("#{swine_first}-#{swine_second}")] = swine_cps
           @swine_cps_arr << swine_cps
-          swine_cpb_total += swine_cps
-          swine_cpb_under << "#{swine_first}-#{swine_second}"
+          if swine_cps != -10000
+            swine_cpb_total += swine_cps
+            swine_cpb_under << "#{swine_first}-#{swine_second}"
+          end
           swine_first_codon_candidates = @@translation.select{|key,value| value == @@translation[swine_first]}.keys
           swine_second_codon_candidates = @@translation.select{|key,value| value == @@translation[swine_second]}.keys
           swine_codon_combination_candiates = Array.new
@@ -59,7 +62,8 @@ class HomeController < ApplicationController
 	def human_submit
     @human_aminoacid_full_name = @@aminoacid_full_name
     @human_translation = @@translation
-    human_sample = params[:sequence].gsub(" ","")
+    human_sample = params[:sequence].gsub(" ","").gsub("\n","").gsub("\t","").gsub("\r","").upcase
+
     @human_sequence_arr = transcription(human_sample).scan(/.../)
     @human_combination_cps = Hash.new
     human_cpb_total = 0
@@ -75,8 +79,10 @@ class HomeController < ApplicationController
           human_cps = @@cps_human_hash["#{reverse_transcription(human_first)}-#{reverse_transcription(human_second)}"]
           @human_combination_cps[reverse_transcription("#{human_first}-#{human_second}")] = human_cps
           @human_cps_arr << human_cps
-          human_cpb_total += human_cps
-          human_cpb_under << "#{human_first}-#{human_second}"
+          if human_cps != -10000
+            human_cpb_total += human_cps
+            human_cpb_under << "#{human_first}-#{human_second}"
+          end
           human_first_codon_candidates = @@translation.select{|key,value| value == @@translation[human_first]}.keys
           human_second_codon_candidates = @@translation.select{|key,value| value == @@translation[human_second]}.keys
           human_codon_combination_candiates = Array.new
@@ -109,7 +115,8 @@ class HomeController < ApplicationController
 	def chicken_submit
     @chicken_aminoacid_full_name = @@aminoacid_full_name
     @chicken_translation = @@translation
-    chicken_sample = params[:sequence].gsub(" ","")
+    chicken_sample = params[:sequence].gsub(" ","").gsub("\n","").gsub("\t","").gsub("\r","").upcase
+
     @chicken_sequence_arr = transcription(chicken_sample).scan(/.../)
     @chicken_combination_cps = Hash.new
     chicken_cpb_total = 0
@@ -125,8 +132,10 @@ class HomeController < ApplicationController
           chicken_cps = @@cps_chicken_hash["#{reverse_transcription(chicken_first)}-#{reverse_transcription(chicken_second)}"]
           @chicken_combination_cps[reverse_transcription("#{chicken_first}-#{chicken_second}")] = chicken_cps
           @chicken_cps_arr << chicken_cps
-          chicken_cpb_total += chicken_cps
-          chicken_cpb_under << "#{chicken_first}-#{chicken_second}"
+          if chicken_cps != -10000
+            chicken_cpb_total += chicken_cps
+            chicken_cpb_under << "#{chicken_first}-#{chicken_second}"
+          end
           chicken_first_codon_candidates = @@translation.select{|key,value| value == @@translation[chicken_first]}.keys
           chicken_second_codon_candidates = @@translation.select{|key,value| value == @@translation[chicken_second]}.keys
           chicken_codon_combination_candiates = Array.new
@@ -160,7 +169,7 @@ class HomeController < ApplicationController
   def united_submit
     @swine_aminoacid_full_name = @@aminoacid_full_name
     @swine_translation = @@translation
-    swine_sample = params[:sequence].gsub(" ","")
+    swine_sample = params[:sequence].gsub(" ","").gsub("\n","").gsub("\t","").gsub("\r","").upcase
     @swine_sequence_arr = transcription(swine_sample).scan(/.../)
     @swine_combination_cps = Hash.new
     swine_cpb_total = 0
@@ -176,8 +185,10 @@ class HomeController < ApplicationController
           swine_cps = @@cps_swine_hash["#{reverse_transcription(swine_first)}-#{reverse_transcription(swine_second)}"]
           @swine_combination_cps[reverse_transcription("#{swine_first}-#{swine_second}")] = swine_cps
           @swine_cps_arr << swine_cps
-          swine_cpb_total += swine_cps
-          swine_cpb_under << "#{swine_first}-#{swine_second}"
+          if swine_cps != -10000
+            swine_cpb_total += swine_cps
+            swine_cpb_under << "#{swine_first}-#{swine_second}"
+          end
           swine_first_codon_candidates = @@translation.select{|key,value| value == @@translation[swine_first]}.keys
           swine_second_codon_candidates = @@translation.select{|key,value| value == @@translation[swine_second]}.keys
           swine_codon_combination_candiates = Array.new
@@ -208,7 +219,8 @@ class HomeController < ApplicationController
 
     @human_aminoacid_full_name = @@aminoacid_full_name
     @human_translation = @@translation
-    human_sample = params[:sequence].gsub(" ","")
+    human_sample = params[:sequence].gsub(" ","").gsub("\n","").gsub("\t","").gsub("\r","").upcase
+
     @human_sequence_arr = transcription(human_sample).scan(/.../)
     @human_combination_cps = Hash.new
     human_cpb_total = 0
@@ -224,8 +236,10 @@ class HomeController < ApplicationController
           human_cps = @@cps_human_hash["#{reverse_transcription(human_first)}-#{reverse_transcription(human_second)}"]
           @human_combination_cps[reverse_transcription("#{human_first}-#{human_second}")] = human_cps
           @human_cps_arr << human_cps
-          human_cpb_total += human_cps
-          human_cpb_under << "#{human_first}-#{human_second}"
+          if human_cps != -10000
+            human_cpb_total += human_cps
+            human_cpb_under << "#{human_first}-#{human_second}"
+          end
           human_first_codon_candidates = @@translation.select{|key,value| value == @@translation[human_first]}.keys
           human_second_codon_candidates = @@translation.select{|key,value| value == @@translation[human_second]}.keys
           human_codon_combination_candiates = Array.new
@@ -256,7 +270,8 @@ class HomeController < ApplicationController
 
     @chicken_aminoacid_full_name = @@aminoacid_full_name
     @chicken_translation = @@translation
-    chicken_sample = params[:sequence].gsub(" ","")
+    chicken_sample = params[:sequence].gsub(" ","").gsub("\n","").gsub("\t","").gsub("\r","").upcase
+
     @chicken_sequence_arr = transcription(chicken_sample).scan(/.../)
     @chicken_combination_cps = Hash.new
     chicken_cpb_total = 0
@@ -272,8 +287,10 @@ class HomeController < ApplicationController
           chicken_cps = @@cps_chicken_hash["#{reverse_transcription(chicken_first)}-#{reverse_transcription(chicken_second)}"]
           @chicken_combination_cps[reverse_transcription("#{chicken_first}-#{chicken_second}")] = chicken_cps
           @chicken_cps_arr << chicken_cps
-          chicken_cpb_total += chicken_cps
-          chicken_cpb_under << "#{chicken_first}-#{chicken_second}"
+          if chicken_cps != -10000
+            chicken_cpb_total += chicken_cps
+            chicken_cpb_under << "#{chicken_first}-#{chicken_second}"
+          end
           chicken_first_codon_candidates = @@translation.select{|key,value| value == @@translation[chicken_first]}.keys
           chicken_second_codon_candidates = @@translation.select{|key,value| value == @@translation[chicken_second]}.keys
           chicken_codon_combination_candiates = Array.new
@@ -301,5 +318,11 @@ class HomeController < ApplicationController
     @chicken_negative_cps_min = @chicken_cps_arr.sort[0]
     @chicken_negative_cps_max = @chicken_cps_arr.sort[@chicken_cps_arr.sort.index(0) - 1]
     @chicken_negative_cps_max = 0 if @chicken_positive_cps_max == nil
+  logger.info("---------------------------")
+
+  logger.info(@chicken_minimal_candidate_arr.count)
+  logger.info("---------------------------")
+  logger.info(@chicken_minimal_candidate_cpses.count)
+  logger.info("---------------------------")
   end
 end

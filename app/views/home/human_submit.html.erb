@@ -6,9 +6,9 @@
     <%human_first = x%>
     <%human_second = @human_sequence_arr[i+1]%>
     <%human_third = @human_sequence_arr[i+2]%>
-<div style="display:inline-block;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:46px;">
+<div style="display:inline-block;vertical-align:top;position:relative; width:60px;font-size:0; text-align:center; margin-bottom:46px;">
   <div>
-    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+    <div style="display:inline-block;vertical-align:top;width:50%;font-size:15px; text-align:center;">
       <div style="display:block; font-size:10px; border-top:1px solid black;">
         <%=i + 1%>
       </div>
@@ -19,7 +19,7 @@
         <%=human_first.gsub("U","T")%>
       </div>
     </div>
-    <div style="display:inline-block;width:50%;font-size:15px; text-align:center;">
+    <div style="display:inline-block;vertical-align:top;width:50%;font-size:15px; text-align:center;">
       <div style="display:block; font-size:10px;border-top:1px solid black;">
         <%=i + 2%>
       </div>
@@ -71,9 +71,9 @@
 
   <div>
         <%if @human_combination_cps["#{human_first.gsub("U","T")}-#{human_second.gsub("U","T")}"].round(4) >= 0%>
-    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(255,0,0,<%= human_opacity * ((@human_combination_cps["#{human_first.gsub("U","T")}-#{human_second.gsub("U","T")}"] - @human_positive_cps_min) / (@human_positive_cps_max - @human_positive_cps_min)).abs%>);">
+    <div style="text-align:center; font-size:8px; position:relative; left:15.00px;width:32.2px; background-color: rgba(255,0,0,<%= human_opacity * ((@human_combination_cps["#{human_first.gsub("U","T")}-#{human_second.gsub("U","T")}"] - @human_positive_cps_min) / (@human_positive_cps_max - @human_positive_cps_min)).abs%>);">
         <%else%>
-    <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background-color: rgba(0,119,221,<%= 1 - human_opacity * ((@human_combination_cps["#{human_first.gsub("U","T")}-#{human_second.gsub("U","T")}"] - @human_negative_cps_min) / (@human_negative_cps_max - @human_negative_cps_min)).abs%>);">
+    <div style="text-align:center; font-size:8px; position:relative; left:15.00px;width:32.2px; background-color: rgba(0,119,221,<%= 1 - human_opacity * ((@human_combination_cps["#{human_first.gsub("U","T")}-#{human_second.gsub("U","T")}"] - @human_negative_cps_min) / (@human_negative_cps_max - @human_negative_cps_min)).abs%>);">
         <%end%>
         <span><%=@human_combination_cps["#{human_first.gsub("U","T")}-#{human_second.gsub("U","T")}"].round(4)%></span>
         <br>
@@ -86,7 +86,7 @@
     </div>
   </div>
       <%else%>
-  <div style="text-align:center; font-size:8px; position:absolute; left:15.00px;width:32.2px; background:black;">
+  <div style="text-align:center; font-size:8px; position:relative; left:15.00px;width:32.2px; background:black;">
     <span style="color:white">terminal</span>
   </div>
       <%end%>
